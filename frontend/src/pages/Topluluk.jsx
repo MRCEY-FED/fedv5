@@ -1471,73 +1471,124 @@ const Topluluk = () => {
             </div>
 
             {/* Etkinlik Kartları */}
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredEtkinlikler.map((etkinlik) => (
                 <div
                   key={etkinlik.id}
                   onClick={() => openEtkinlikModal(etkinlik)}
-                  className={`group relative bg-gradient-to-br from-cyan-500/5 to-blue-500/5 border rounded-2xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500 ${
+                  className={`group relative bg-gradient-to-br from-cyan-500/5 to-blue-500/5 border rounded-2xl overflow-hidden cursor-pointer hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 ${
                     etkinlik.ozelEtkinlik 
                       ? 'border-yellow-500/50 hover:shadow-yellow-500/20' 
                       : 'border-cyan-500/30 hover:shadow-cyan-500/20'
                   }`}
                 >
-                  <div className="grid md:grid-cols-3 gap-0">
-                    {/* Sol - Tarih Bilgisi */}
-                    <div className="relative md:col-span-1 bg-gradient-to-br from-cyan-600/20 to-blue-600/20 p-6 flex flex-col justify-center items-center text-center border-b md:border-b-0 md:border-r border-cyan-500/20">
+                  {/* Etkinlik Resmi */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={etkinlik.resim} 
+                      alt={etkinlik.baslik}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                    
+                    {/* Üst Badge'ler */}
+                    <div className="absolute top-3 left-3 flex items-center gap-2">
                       {etkinlik.ozelEtkinlik && (
-                        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full">
-                          <Star className="w-3 h-3 text-white" fill="white" />
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full shadow-lg">
+                          <Star className="w-3.5 h-3.5 text-white" fill="white" />
                           <span className="text-white text-xs font-bold">ÖZEL</span>
                         </div>
                       )}
-                      
-                      <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-4 ${
-                        etkinlik.kategori === 'Parti' ? 'bg-gradient-to-br from-pink-500 to-purple-500' :
-                        etkinlik.kategori === 'Yarış' ? 'bg-gradient-to-br from-orange-500 to-red-500' :
-                        etkinlik.kategori === 'Turnuva' ? 'bg-gradient-to-br from-yellow-500 to-amber-500' :
-                        etkinlik.kategori === 'Resmi' ? 'bg-gradient-to-br from-blue-500 to-indigo-500' :
-                        'bg-gradient-to-br from-cyan-500 to-blue-500'
-                      } shadow-lg`}>
-                        {etkinlik.kategori === 'Parti' && <PartyPopper className="w-10 h-10 text-white" />}
-                        {etkinlik.kategori === 'Yarış' && <Car className="w-10 h-10 text-white" />}
-                        {etkinlik.kategori === 'Turnuva' && <Trophy className="w-10 h-10 text-white" />}
-                        {etkinlik.kategori === 'Resmi' && <Shield className="w-10 h-10 text-white" />}
-                        {etkinlik.kategori === 'Etkinlik' && <Ticket className="w-10 h-10 text-white" />}
-                      </div>
-                      
-                      <div className="text-cyan-400 text-sm font-medium mb-1">{etkinlik.kategori}</div>
-                      <div className="text-white text-xl font-bold mb-2">{etkinlik.tarih}</div>
-                      <div className="flex items-center gap-2 text-gray-400">
-                        <Clock className="w-4 h-4" />
-                        <span className="text-sm">{etkinlik.baslangicSaati} - {etkinlik.bitisSaati}</span>
-                      </div>
-                      
-                      {/* Durum Badge */}
-                      <div className={`mt-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 ${
-                        etkinlik.durum === 'yaklasan' ? 'bg-cyan-500/20 text-cyan-300' :
-                        etkinlik.durum === 'devamEden' ? 'bg-green-500/20 text-green-300' : 
-                        'bg-gray-500/20 text-gray-300'
+                      <div className={`px-2.5 py-1 rounded-full text-xs font-bold backdrop-blur-sm ${
+                        etkinlik.kategori === 'Parti' ? 'bg-pink-500/80 text-white' :
+                        etkinlik.kategori === 'Yarış' ? 'bg-orange-500/80 text-white' :
+                        etkinlik.kategori === 'Turnuva' ? 'bg-yellow-500/80 text-white' :
+                        etkinlik.kategori === 'Resmi' ? 'bg-blue-500/80 text-white' :
+                        'bg-cyan-500/80 text-white'
                       }`}>
-                        {etkinlik.durum === 'yaklasan' && <Timer className="w-3.5 h-3.5" />}
-                        {etkinlik.durum === 'devamEden' && <Play className="w-3.5 h-3.5" />}
-                        {etkinlik.durum === 'tamamlandi' && <CheckCircle2 className="w-3.5 h-3.5" />}
-                        {etkinlik.durum === 'yaklasan' ? 'Yaklaşan' :
-                         etkinlik.durum === 'devamEden' ? 'Devam Ediyor' : 'Tamamlandı'}
+                        {etkinlik.kategori}
                       </div>
                     </div>
 
-                    {/* Sağ - Etkinlik Detayları */}
-                    <div className="md:col-span-2 p-6">
-                      <h3 className="text-white text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
-                        {etkinlik.baslik}
-                      </h3>
-                      <p className="text-gray-400 leading-relaxed mb-4 line-clamp-2">
-                        {etkinlik.aciklama}
-                      </p>
+                    {/* Sağ Üst - Durum */}
+                    <div className={`absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 backdrop-blur-sm ${
+                      etkinlik.durum === 'yaklasan' ? 'bg-cyan-500/80 text-white' :
+                      etkinlik.durum === 'devamEden' ? 'bg-green-500/80 text-white' : 
+                      'bg-gray-500/80 text-white'
+                    }`}>
+                      {etkinlik.durum === 'yaklasan' && <Timer className="w-3 h-3" />}
+                      {etkinlik.durum === 'devamEden' && <Play className="w-3 h-3" />}
+                      {etkinlik.durum === 'tamamlandi' && <CheckCircle2 className="w-3 h-3" />}
+                      {etkinlik.durum === 'yaklasan' ? 'Yaklaşan' :
+                       etkinlik.durum === 'devamEden' ? 'Canlı' : 'Bitti'}
+                    </div>
 
-                      {/* Info Grid */}
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                    {/* Alt Kısım - Tarih & Saat */}
+                    <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                      <div>
+                        <div className="flex items-center gap-2 text-white/90 text-sm mb-1">
+                          <Calendar className="w-4 h-4" />
+                          <span className="font-semibold">{etkinlik.tarih}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-white/70 text-xs">
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>{etkinlik.baslangicSaati} - {etkinlik.bitisSaati}</span>
+                        </div>
+                      </div>
+                      {etkinlik.katilimciLimiti && (
+                        <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 rounded-lg backdrop-blur-sm">
+                          <Users className="w-3.5 h-3.5 text-cyan-400" />
+                          <span className="text-white text-xs font-medium">Max {etkinlik.katilimciLimiti}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* İçerik */}
+                  <div className="p-5">
+                    <h3 className="text-white text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors line-clamp-1">
+                      {etkinlik.baslik}
+                    </h3>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">
+                      {etkinlik.aciklama}
+                    </p>
+
+                    {/* Alt Bilgiler */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-gray-500 text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>{etkinlik.konum}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <User className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>{etkinlik.organizator}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Ödüller Preview */}
+                    {etkinlik.oduller && etkinlik.oduller.length > 0 && (
+                      <div className="mt-4 pt-4 border-t border-cyan-500/20">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Trophy className="w-4 h-4 text-yellow-400" />
+                          {etkinlik.oduller.slice(0, 2).map((odul, index) => (
+                            <span key={index} className="px-2 py-0.5 bg-yellow-500/10 border border-yellow-500/30 rounded text-yellow-300 text-xs">
+                              {odul}
+                            </span>
+                          ))}
+                          {etkinlik.oduller.length > 2 && (
+                            <span className="text-yellow-400 text-xs">+{etkinlik.oduller.length - 2}</span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </div>
+              ))}
                         <div className="flex items-center gap-2 text-gray-400">
                           <MapPin className="w-4 h-4 text-cyan-400" />
                           <span className="text-sm">{etkinlik.konum}</span>
