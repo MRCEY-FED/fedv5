@@ -4,7 +4,7 @@ import {
   ChevronLeft, X, ChevronRight, Image, Film, Play, Camera, Video,
   Skull, Eye, Lock, BookOpen, HelpCircle, Sparkles, PlayCircle,
   Gamepad2, Briefcase, Car, Home, Users, DollarSign, Heart, Shield,
-  Search, Filter, Clock, ThumbsUp
+  Search, Filter, Clock, ThumbsUp, ArrowRight, Zap, Star, Flame
 } from 'lucide-react';
 
 // ==================== İLLEGAL İPUCU VERİLERİ ====================
@@ -117,7 +117,7 @@ const videoRehberler = [
   }
 ];
 
-// ==================== GALERİ VERİLERİ ====================--]]
+// ==================== GALERİ VERİLERİ ====================
 const galeriFotograflar = [
   { id: 1, url: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_5.png", title: "Yağmurlu bir gecede İskele", description: "Los Santos sokaklarında bir gece" },
   { id: 2, url: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp", title: "İhale Günü", description: "Şehrin zenginlerinin bir araya geldiği bir etkinlik." },
@@ -152,11 +152,71 @@ const renkSiniflari = {
   green: { bg: 'from-green-500/20 to-green-600/10', border: 'border-green-500/40', icon: 'from-green-500 to-green-600', text: 'text-green-400', badge: 'bg-green-500/20 text-green-300', glow: 'shadow-green-500/30' }
 };
 
+// ==================== KATEGORİ VERİLERİ ====================
+const kategoriler = [
+  {
+    id: 'illegal',
+    baslik: 'Illegal İpuçları',
+    aciklama: 'Şehrin karanlık yüzünü keşfet. Gizli lokasyonlar, tehlikeli bağlantılar ve yeraltı dünyasının sırları burada.',
+    resim: 'https://694360ba73fe9fd20180e80e.imgix.net/33.webp',
+    icon: Skull,
+    renk: 'from-red-600 to-orange-600',
+    glowRenk: 'shadow-red-500/50',
+    borderRenk: 'border-red-500/50',
+    bgRenk: 'from-red-950/80 to-black/90',
+    adet: illegalIpuclari.length,
+    etiket: 'GİZLİ',
+    etiketRenk: 'bg-red-500'
+  },
+  {
+    id: 'rehber',
+    baslik: 'Video Rehberler',
+    aciklama: 'Sunucuya yeni misin? Tecrübeli oyunculardan öğren. Para kazanma, araç alma, ev satın alma ve daha fazlası.',
+    resim: 'https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp',
+    icon: PlayCircle,
+    renk: 'from-emerald-600 to-teal-600',
+    glowRenk: 'shadow-emerald-500/50',
+    borderRenk: 'border-emerald-500/50',
+    bgRenk: 'from-emerald-950/80 to-black/90',
+    adet: videoRehberler.length,
+    etiket: 'EĞİTİM',
+    etiketRenk: 'bg-emerald-500'
+  },
+  {
+    id: 'kareler',
+    baslik: 'Oyundan Kareler',
+    aciklama: 'Topluluğumuzun en güzel anları. Unutulmaz partiler, epik çatışmalar ve dostlukların fotoğrafları.',
+    resim: 'https://694360ba73fe9fd20180e80e.imgix.net/5.webp',
+    icon: Camera,
+    renk: 'from-violet-600 to-purple-600',
+    glowRenk: 'shadow-violet-500/50',
+    borderRenk: 'border-violet-500/50',
+    bgRenk: 'from-violet-950/80 to-black/90',
+    adet: galeriFotograflar.length,
+    etiket: 'GALERİ',
+    etiketRenk: 'bg-violet-500'
+  },
+  {
+    id: 'klipler',
+    baslik: 'Oyundan Kesitler',
+    aciklama: 'En eğlenceli ve heyecanlı RP anları. Komik sahneler, aksiyon dolu takipler ve unutulmaz diyaloglar.',
+    resim: 'https://694360ba73fe9fd20180e80e.imgix.net/image.webp',
+    icon: Film,
+    renk: 'from-fuchsia-600 to-pink-600',
+    glowRenk: 'shadow-fuchsia-500/50',
+    borderRenk: 'border-fuchsia-500/50',
+    bgRenk: 'from-fuchsia-950/80 to-black/90',
+    adet: galeriVideolar.length,
+    etiket: 'VİDEO',
+    etiketRenk: 'bg-fuchsia-500'
+  }
+];
+
 const Topluluk = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedRehber, setSelectedRehber] = useState(null);
-  const [activeTab, setActiveTab] = useState('illegal');
+  const [activeTab, setActiveTab] = useState(null);
   const [rehberKategori, setRehberKategori] = useState('all');
   const [rehberSearch, setRehberSearch] = useState('');
 
@@ -182,7 +242,7 @@ const Topluluk = () => {
     return matchKategori && matchSearch;
   });
 
-  const kategoriler = [...new Set(videoRehberler.map(r => r.kategori))];
+  const rehberKategorileri = [...new Set(videoRehberler.map(r => r.kategori))];
 
   // Keyboard navigation
   React.useEffect(() => {
@@ -306,11 +366,21 @@ const Topluluk = () => {
       )}
 
       <div className="max-w-7xl mx-auto">
-        {/* Back Button */}
-        <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors mb-8 group">
-          <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-          <span>Ana Sayfaya Dön</span>
-        </Link>
+        {/* Back Button - sadece içerik görüntülenirken göster */}
+        {activeTab ? (
+          <button 
+            onClick={() => setActiveTab(null)} 
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors mb-8 group"
+          >
+            <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span>Kategorilere Dön</span>
+          </button>
+        ) : (
+          <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors mb-8 group">
+            <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span>Ana Sayfaya Dön</span>
+          </Link>
+        )}
 
         {/* Header */}
         <div className="text-center mb-12">
@@ -323,150 +393,80 @@ const Topluluk = () => {
             </span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            İpuçları, rehberler, galeri ve daha fazlası
+            {activeTab ? kategoriler.find(k => k.id === activeTab)?.aciklama : 'İpuçları, rehberler, galeri ve daha fazlası'}
           </p>
         </div>
 
-        {/* Modern Sidebar + Content Layout */}
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar Menu */}
-          <div className="lg:w-72 flex-shrink-0">
-            <div className="sticky top-28 bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl">
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
-                <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
+        {/* ==================== KATEGORİ KARTLARI ==================== */}
+        {!activeTab && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {kategoriler.map((kategori) => {
+              const IconComponent = kategori.icon;
+              return (
+                <div
+                  key={kategori.id}
+                  onClick={() => setActiveTab(kategori.id)}
+                  className={`group relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl ${kategori.glowRenk}`}
+                >
+                  {/* Background Image */}
+                  <div className="absolute inset-0">
+                    <img 
+                      src={kategori.resim} 
+                      alt={kategori.baslik}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${kategori.bgRenk}`} />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative p-8 min-h-[320px] flex flex-col justify-between">
+                    {/* Top Section */}
+                    <div className="flex items-start justify-between">
+                      <div className={`inline-flex items-center gap-2 px-3 py-1.5 ${kategori.etiketRenk} rounded-full`}>
+                        <Zap className="w-3.5 h-3.5 text-white" />
+                        <span className="text-white text-xs font-bold tracking-wider">{kategori.etiket}</span>
+                      </div>
+                      <div className={`w-14 h-14 bg-gradient-to-br ${kategori.renk} rounded-2xl flex items-center justify-center shadow-xl ${kategori.glowRenk} transform group-hover:rotate-12 transition-transform duration-500`}>
+                        <IconComponent className="w-7 h-7 text-white" />
+                      </div>
+                    </div>
+
+                    {/* Bottom Section */}
+                    <div>
+                      <h3 className="text-3xl font-bold text-white mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                        {kategori.baslik}
+                      </h3>
+                      <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-sm">
+                        {kategori.aciklama}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2 text-white/80">
+                            <Star className="w-4 h-4 text-yellow-400" />
+                            <span className="text-sm font-medium">{kategori.adet} İçerik</span>
+                          </div>
+                        </div>
+                        
+                        <div className={`flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r ${kategori.renk} rounded-xl text-white font-bold text-sm shadow-lg ${kategori.glowRenk} group-hover:gap-4 transition-all duration-300`}>
+                          <span>Keşfet</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Animated Border */}
+                  <div className={`absolute inset-0 rounded-3xl border-2 ${kategori.borderRenk} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  
+                  {/* Corner Glow Effect */}
+                  <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${kategori.renk} rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
                 </div>
-                <div>
-                  <h3 className="text-white font-bold">Kategoriler</h3>
-                  <p className="text-gray-500 text-xs">İçerik seçin</p>
-                </div>
-              </div>
-              
-              <nav className="space-y-2">
-                <button
-                  onClick={() => setActiveTab('illegal')}
-                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium transition-all duration-300 group ${
-                    activeTab === 'illegal'
-                      ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg shadow-red-500/30'
-                      : 'text-gray-400 hover:bg-white/5 hover:text-red-400'
-                  }`}
-                >
-                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
-                    activeTab === 'illegal' 
-                      ? 'bg-white/20' 
-                      : 'bg-red-500/10 group-hover:bg-red-500/20'
-                  }`}>
-                    <Skull className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <span className="block text-sm">Illegal İpucu</span>
-                    <span className={`text-xs ${activeTab === 'illegal' ? 'text-white/70' : 'text-gray-600'}`}>
-                      {illegalIpuclari.length} ipucu
-                    </span>
-                  </div>
-                  {activeTab === 'illegal' && (
-                    <ChevronRight className="w-4 h-4" />
-                  )}
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('rehber')}
-                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium transition-all duration-300 group ${
-                    activeTab === 'rehber'
-                      ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30'
-                      : 'text-gray-400 hover:bg-white/5 hover:text-emerald-400'
-                  }`}
-                >
-                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
-                    activeTab === 'rehber' 
-                      ? 'bg-white/20' 
-                      : 'bg-emerald-500/10 group-hover:bg-emerald-500/20'
-                  }`}>
-                    <BookOpen className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <span className="block text-sm">Video Rehberler</span>
-                    <span className={`text-xs ${activeTab === 'rehber' ? 'text-white/70' : 'text-gray-600'}`}>
-                      {videoRehberler.length} video
-                    </span>
-                  </div>
-                  {activeTab === 'rehber' && (
-                    <ChevronRight className="w-4 h-4" />
-                  )}
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('kareler')}
-                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium transition-all duration-300 group ${
-                    activeTab === 'kareler'
-                      ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/30'
-                      : 'text-gray-400 hover:bg-white/5 hover:text-violet-400'
-                  }`}
-                >
-                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
-                    activeTab === 'kareler' 
-                      ? 'bg-white/20' 
-                      : 'bg-violet-500/10 group-hover:bg-violet-500/20'
-                  }`}>
-                    <Image className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <span className="block text-sm">Oyundan Kareler</span>
-                    <span className={`text-xs ${activeTab === 'kareler' ? 'text-white/70' : 'text-gray-600'}`}>
-                      {galeriFotograflar.length} fotoğraf
-                    </span>
-                  </div>
-                  {activeTab === 'kareler' && (
-                    <ChevronRight className="w-4 h-4" />
-                  )}
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('klipler')}
-                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium transition-all duration-300 group ${
-                    activeTab === 'klipler'
-                      ? 'bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white shadow-lg shadow-fuchsia-500/30'
-                      : 'text-gray-400 hover:bg-white/5 hover:text-fuchsia-400'
-                  }`}
-                >
-                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
-                    activeTab === 'klipler' 
-                      ? 'bg-white/20' 
-                      : 'bg-fuchsia-500/10 group-hover:bg-fuchsia-500/20'
-                  }`}>
-                    <Film className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <span className="block text-sm">Oyundan Kesitler</span>
-                    <span className={`text-xs ${activeTab === 'klipler' ? 'text-white/70' : 'text-gray-600'}`}>
-                      {galeriVideolar.length} video
-                    </span>
-                  </div>
-                  {activeTab === 'klipler' && (
-                    <ChevronRight className="w-4 h-4" />
-                  )}
-                </button>
-              </nav>
-
-              {/* Discord CTA in Sidebar */}
-              <div className="mt-6 pt-4 border-t border-white/10">
-                <a
-                  href="https://discord.gg/fedvsocial"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 border border-[#5865F2]/30 rounded-xl text-[#5865F2] transition-all group"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                  </svg>
-                  <span className="text-sm font-medium">Discord'a Katıl</span>
-                </a>
-              </div>
-            </div>
+              );
+            })}
           </div>
-
-          {/* Main Content Area */}
-          <div className="flex-1 min-w-0">
+        )}
 
         {/* ==================== ILLEGAL İPUCU ==================== */}
         {activeTab === 'illegal' && (
@@ -568,7 +568,7 @@ const Topluluk = () => {
                   className="pl-12 pr-8 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all appearance-none cursor-pointer min-w-[180px]"
                 >
                   <option value="all">Tüm Kategoriler</option>
-                  {kategoriler.map(kat => (
+                  {rehberKategorileri.map(kat => (
                     <option key={kat} value={kat}>{kat}</option>
                   ))}
                 </select>
@@ -584,7 +584,7 @@ const Topluluk = () => {
               <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
               <div className="flex items-center gap-2 text-gray-400">
                 <BookOpen className="w-4 h-4 text-emerald-400" />
-                <span>{kategoriler.length} Kategori</span>
+                <span>{rehberKategorileri.length} Kategori</span>
               </div>
             </div>
 
@@ -776,8 +776,30 @@ const Topluluk = () => {
           </div>
         )}
 
+        {/* Discord CTA - sadece kategori seçim ekranında göster */}
+        {!activeTab && (
+          <div className="mt-16 text-center">
+            <div className="inline-block bg-gradient-to-br from-[#5865F2]/10 to-[#5865F2]/5 backdrop-blur-sm border border-[#5865F2]/30 rounded-2xl p-8 max-w-2xl">
+              <div className="w-16 h-16 bg-[#5865F2] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#5865F2]/30">
+                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">İçerik Paylaşmak İster misin?</h3>
+              <p className="text-gray-400 mb-6">
+                Kendi roleplay anlarını ve kliplerini toplulukla paylaşmak için Discord sunucumuza katıl!
+              </p>
+              <a
+                href="https://discord.gg/fedvsocial"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-[#5865F2]/30 hover:shadow-[#5865F2]/50"
+              >
+                Discord'a Katıl
+              </a>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
