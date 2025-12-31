@@ -776,21 +776,6 @@ const Topluluk = () => {
           </div>
         )}
 
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="inline-block bg-gradient-to-br from-violet-500/10 to-purple-500/10 backdrop-blur-sm border border-violet-500/30 rounded-2xl p-8 max-w-2xl">
-            <h3 className="text-2xl font-bold text-white mb-4">İçerik Paylaşmak İster misin?</h3>
-            <p className="text-gray-400 mb-6">
-              Kendi roleplay anlarını ve kliplerini toplulukla paylaşmak için Discord sunucumuza katıl!
-            </p>
-            <a
-              href="https://discord.gg/fedvsocial"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50"
-            >
-              Discord'a Katıl
-            </a>
           </div>
         </div>
       </div>
