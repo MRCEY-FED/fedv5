@@ -1391,6 +1391,226 @@ const Topluluk = () => {
           </div>
         )}
 
+        {/* ==================== ETKİNLİK TAKVİMİ ==================== */}
+        {activeTab === 'etkinlik' && (
+          <div>
+            {/* Header */}
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full mb-4">
+                <CalendarDays className="w-4 h-4 text-cyan-400" />
+                <span className="text-cyan-400 text-sm font-medium">Etkinlik Takvimi</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  📅 ETKİNLİK TAKVİMİ
+                </span>
+              </h2>
+              <p className="text-gray-400 max-w-xl mx-auto">
+                Yaklaşan etkinlikler, partiler, yarışmalar ve turnuvalar - Hiçbir etkinliği kaçırma!
+              </p>
+            </div>
+
+            {/* Takvim Banner */}
+            <div className="relative mb-8 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl p-6 overflow-hidden">
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px'}} />
+              </div>
+              <div className="relative flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                    <CalendarDays className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-white text-2xl font-bold">FED:V Etkinlik Takvimi</h3>
+                    <p className="text-white/80 text-sm">Tüm etkinlikleri takip et, hiçbirini kaçırma!</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-center px-4 py-2 bg-white/20 rounded-xl backdrop-blur-sm">
+                    <p className="text-white text-2xl font-bold">{etkinlikler.filter(e => e.durum === 'yaklasan').length}</p>
+                    <p className="text-white/70 text-xs">Yaklaşan</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/20 rounded-xl backdrop-blur-sm">
+                    <p className="text-white text-2xl font-bold">{etkinlikler.length}</p>
+                    <p className="text-white/70 text-xs">Toplam</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Kategori Filtresi */}
+            <div className="flex flex-wrap gap-2 mb-8 justify-center">
+              <button
+                onClick={() => setEtkinlikKategori('all')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  etkinlikKategori === 'all'
+                    ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/30'
+                    : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20'
+                }`}
+              >
+                Tümü
+              </button>
+              {etkinlikKategorileri.map(kat => (
+                <button
+                  key={kat}
+                  onClick={() => setEtkinlikKategori(kat)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                    etkinlikKategori === kat
+                      ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/30'
+                      : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20'
+                  }`}
+                >
+                  {kat === 'Parti' && <PartyPopper className="w-4 h-4" />}
+                  {kat === 'Yarış' && <Car className="w-4 h-4" />}
+                  {kat === 'Turnuva' && <Trophy className="w-4 h-4" />}
+                  {kat === 'Resmi' && <Shield className="w-4 h-4" />}
+                  {kat === 'Etkinlik' && <Ticket className="w-4 h-4" />}
+                  {kat}
+                </button>
+              ))}
+            </div>
+
+            {/* Etkinlik Kartları */}
+            <div className="space-y-6">
+              {filteredEtkinlikler.map((etkinlik) => (
+                <div
+                  key={etkinlik.id}
+                  onClick={() => openEtkinlikModal(etkinlik)}
+                  className={`group relative bg-gradient-to-br from-cyan-500/5 to-blue-500/5 border rounded-2xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500 ${
+                    etkinlik.ozelEtkinlik 
+                      ? 'border-yellow-500/50 hover:shadow-yellow-500/20' 
+                      : 'border-cyan-500/30 hover:shadow-cyan-500/20'
+                  }`}
+                >
+                  <div className="grid md:grid-cols-3 gap-0">
+                    {/* Sol - Tarih Bilgisi */}
+                    <div className="relative md:col-span-1 bg-gradient-to-br from-cyan-600/20 to-blue-600/20 p-6 flex flex-col justify-center items-center text-center border-b md:border-b-0 md:border-r border-cyan-500/20">
+                      {etkinlik.ozelEtkinlik && (
+                        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full">
+                          <Star className="w-3 h-3 text-white" fill="white" />
+                          <span className="text-white text-xs font-bold">ÖZEL</span>
+                        </div>
+                      )}
+                      
+                      <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-4 ${
+                        etkinlik.kategori === 'Parti' ? 'bg-gradient-to-br from-pink-500 to-purple-500' :
+                        etkinlik.kategori === 'Yarış' ? 'bg-gradient-to-br from-orange-500 to-red-500' :
+                        etkinlik.kategori === 'Turnuva' ? 'bg-gradient-to-br from-yellow-500 to-amber-500' :
+                        etkinlik.kategori === 'Resmi' ? 'bg-gradient-to-br from-blue-500 to-indigo-500' :
+                        'bg-gradient-to-br from-cyan-500 to-blue-500'
+                      } shadow-lg`}>
+                        {etkinlik.kategori === 'Parti' && <PartyPopper className="w-10 h-10 text-white" />}
+                        {etkinlik.kategori === 'Yarış' && <Car className="w-10 h-10 text-white" />}
+                        {etkinlik.kategori === 'Turnuva' && <Trophy className="w-10 h-10 text-white" />}
+                        {etkinlik.kategori === 'Resmi' && <Shield className="w-10 h-10 text-white" />}
+                        {etkinlik.kategori === 'Etkinlik' && <Ticket className="w-10 h-10 text-white" />}
+                      </div>
+                      
+                      <div className="text-cyan-400 text-sm font-medium mb-1">{etkinlik.kategori}</div>
+                      <div className="text-white text-xl font-bold mb-2">{etkinlik.tarih}</div>
+                      <div className="flex items-center gap-2 text-gray-400">
+                        <Clock className="w-4 h-4" />
+                        <span className="text-sm">{etkinlik.baslangicSaati} - {etkinlik.bitisSaati}</span>
+                      </div>
+                      
+                      {/* Durum Badge */}
+                      <div className={`mt-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 ${
+                        etkinlik.durum === 'yaklasan' ? 'bg-cyan-500/20 text-cyan-300' :
+                        etkinlik.durum === 'devamEden' ? 'bg-green-500/20 text-green-300' : 
+                        'bg-gray-500/20 text-gray-300'
+                      }`}>
+                        {etkinlik.durum === 'yaklasan' && <Timer className="w-3.5 h-3.5" />}
+                        {etkinlik.durum === 'devamEden' && <Play className="w-3.5 h-3.5" />}
+                        {etkinlik.durum === 'tamamlandi' && <CheckCircle2 className="w-3.5 h-3.5" />}
+                        {etkinlik.durum === 'yaklasan' ? 'Yaklaşan' :
+                         etkinlik.durum === 'devamEden' ? 'Devam Ediyor' : 'Tamamlandı'}
+                      </div>
+                    </div>
+
+                    {/* Sağ - Etkinlik Detayları */}
+                    <div className="md:col-span-2 p-6">
+                      <h3 className="text-white text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
+                        {etkinlik.baslik}
+                      </h3>
+                      <p className="text-gray-400 leading-relaxed mb-4 line-clamp-2">
+                        {etkinlik.aciklama}
+                      </p>
+
+                      {/* Info Grid */}
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <MapPin className="w-4 h-4 text-cyan-400" />
+                          <span className="text-sm">{etkinlik.konum}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <User className="w-4 h-4 text-cyan-400" />
+                          <span className="text-sm">{etkinlik.organizator}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <Users className="w-4 h-4 text-cyan-400" />
+                          <span className="text-sm">{etkinlik.katilimciLimiti ? `Max ${etkinlik.katilimciLimiti} kişi` : 'Sınırsız'}</span>
+                        </div>
+                      </div>
+
+                      {/* Ödüller Preview */}
+                      {etkinlik.oduller && etkinlik.oduller.length > 0 && (
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Trophy className="w-4 h-4 text-yellow-400" />
+                          {etkinlik.oduller.slice(0, 2).map((odul, index) => (
+                            <span key={index} className="px-2 py-1 bg-yellow-500/10 border border-yellow-500/30 rounded text-yellow-300 text-xs">
+                              {odul}
+                            </span>
+                          ))}
+                          {etkinlik.oduller.length > 2 && (
+                            <span className="text-yellow-400 text-xs">+{etkinlik.oduller.length - 2} daha</span>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Detay Butonu */}
+                      <div className="flex justify-end mt-4">
+                        <div className="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-3 transition-all">
+                          <span>Detayları Gör</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Etkinlik Yok */}
+            {filteredEtkinlikler.length === 0 && (
+              <div className="text-center py-16">
+                <CalendarDays className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">Etkinlik Bulunamadı</h3>
+                <p className="text-gray-400">Bu kategoride henüz etkinlik yok.</p>
+              </div>
+            )}
+
+            {/* Alt Bilgi */}
+            <div className="mt-12 bg-gradient-to-br from-cyan-500/10 to-blue-500/5 border border-cyan-500/30 rounded-2xl p-8 text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <PartyPopper className="w-6 h-6 text-cyan-400" />
+                <h3 className="text-xl font-bold text-white">Etkinlik Önerisi mi Var?</h3>
+              </div>
+              <p className="text-gray-400 max-w-lg mx-auto mb-6">
+                Kendi etkinliğini düzenlemek veya öneride bulunmak için Discord sunucumuza katıl!
+              </p>
+              <a
+                href="https://discord.gg/fedvsocial"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold rounded-xl hover:scale-105 transition-all shadow-lg shadow-cyan-500/30"
+              >
+                <Gift className="w-5 h-5" />
+                Etkinlik Öner
+              </a>
+            </div>
+          </div>
+        )}
+
         {/* Discord CTA - sadece kategori seçim ekranında göster */}
         {!activeTab && (
           <div className="mt-16 text-center">
