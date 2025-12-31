@@ -982,17 +982,6 @@ const Topluluk = () => {
           </div>
         )}
 
-                  {/* Animated Border */}
-                  <div className={`absolute inset-0 rounded-3xl border-2 ${kategori.borderRenk} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                  
-                  {/* Corner Glow Effect */}
-                  <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${kategori.renk} rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
-                </div>
-              );
-            })}
-          </div>
-        )}
-
         {/* ==================== ILLEGAL İPUCU ==================== */}
         {activeTab === 'illegal' && (
           <div>
