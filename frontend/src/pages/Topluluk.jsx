@@ -5,7 +5,8 @@ import {
   Skull, Eye, Lock, BookOpen, HelpCircle, Sparkles, PlayCircle,
   Gamepad2, Briefcase, Car, Home, Users, DollarSign, Heart, Shield,
   Search, Filter, Clock, ThumbsUp, ArrowRight, Zap, Star, Flame,
-  Newspaper, Radio, Mic, TrendingUp, AlertTriangle, Calendar, MapPin, User
+  Newspaper, Radio, Mic, TrendingUp, AlertTriangle, Calendar, MapPin, User,
+  CalendarDays, PartyPopper, Trophy, Music, Ticket, Gift, Timer, CheckCircle2
 } from 'lucide-react';
 
 // ==================== İLLEGAL İPUCU VERİLERİ ====================
