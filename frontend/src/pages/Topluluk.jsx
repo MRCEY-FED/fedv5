@@ -389,6 +389,20 @@ const kategoriler = [
     adet: weazelHaberler.length,
     etiket: 'HABER',
     etiketRenk: 'bg-amber-500'
+  },
+  {
+    id: 'etkinlik',
+    baslik: 'Etkinlik Takvimi',
+    aciklama: 'Yaklaşan etkinlikler, partiler, yarışmalar ve turnuvalar! Hiçbir etkinliği kaçırma, takvimine ekle.',
+    resim: 'https://694360ba73fe9fd20180e80e.imgix.net/1e.jpg',
+    icon: CalendarDays,
+    renk: 'from-cyan-500 to-blue-600',
+    glowRenk: 'shadow-cyan-500/50',
+    borderRenk: 'border-cyan-500/50',
+    bgRenk: 'from-cyan-950/80 to-black/90',
+    adet: etkinlikler.length,
+    etiket: 'TAKVİM',
+    etiketRenk: 'bg-cyan-500'
   }
 ];
 
