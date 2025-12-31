@@ -411,10 +411,12 @@ const Topluluk = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedRehber, setSelectedRehber] = useState(null);
   const [selectedHaber, setSelectedHaber] = useState(null);
+  const [selectedEtkinlik, setSelectedEtkinlik] = useState(null);
   const [activeTab, setActiveTab] = useState(null);
   const [rehberKategori, setRehberKategori] = useState('all');
   const [rehberSearch, setRehberSearch] = useState('');
   const [haberKategori, setHaberKategori] = useState('all');
+  const [etkinlikKategori, setEtkinlikKategori] = useState('all');
 
   // Modal kontrolü
   const openImageModal = (index) => setSelectedImage(index);
@@ -433,10 +435,19 @@ const Topluluk = () => {
   const openHaberModal = (haber) => setSelectedHaber(haber);
   const closeHaberModal = () => setSelectedHaber(null);
 
+  const openEtkinlikModal = (etkinlik) => setSelectedEtkinlik(etkinlik);
+  const closeEtkinlikModal = () => setSelectedEtkinlik(null);
+
   // Haber kategorileri
   const haberKategorileri = [...new Set(weazelHaberler.map(h => h.kategori))];
   const filteredHaberler = weazelHaberler.filter(haber => 
     haberKategori === 'all' || haber.kategori === haberKategori
+  );
+
+  // Etkinlik kategorileri
+  const etkinlikKategorileri = [...new Set(etkinlikler.map(e => e.kategori))];
+  const filteredEtkinlikler = etkinlikler.filter(etkinlik => 
+    etkinlikKategori === 'all' || etkinlik.kategori === etkinlikKategori
   );
 
   // Rehber filtreleme
