@@ -427,6 +427,108 @@ const universityDersler = [
 // Eski içerikler (geriye uyumluluk için)
 const universityIcerikler = universityDersler;
 
+// Mezuniyet Şartları
+const mezuniyetSartlari = [
+  {
+    id: 1,
+    baslik: "Minimum Kredi Tamamlama",
+    aciklama: "Mezun olabilmek için en az 30 kredi tamamlamanız gerekmektedir.",
+    icon: "BookOpen",
+    gereklilik: "30 Kredi",
+    durum: "Zorunlu"
+  },
+  {
+    id: 2,
+    baslik: "Bölüm Dersleri",
+    aciklama: "Seçtiğiniz bölümün tüm zorunlu derslerini başarıyla tamamlamalısınız.",
+    icon: "CheckCircle",
+    gereklilik: "Tüm Zorunlu Dersler",
+    durum: "Zorunlu"
+  },
+  {
+    id: 3,
+    baslik: "Staj Programı",
+    aciklama: "En az 2 hafta süreyle bir işletmede staj yapmanız gerekmektedir.",
+    icon: "Briefcase",
+    gereklilik: "2 Hafta Staj",
+    durum: "Zorunlu"
+  },
+  {
+    id: 4,
+    baslik: "Topluluk Hizmeti",
+    aciklama: "Los Santos'a katkıda bulunmak için topluluk hizmeti yapmalısınız.",
+    icon: "Heart",
+    gereklilik: "10 Saat",
+    durum: "Önerilen"
+  },
+  {
+    id: 5,
+    baslik: "Bitirme Projesi",
+    aciklama: "Bölümünüze uygun bir bitirme projesi hazırlayıp sunmalısınız.",
+    icon: "FileText",
+    gereklilik: "1 Proje",
+    durum: "Zorunlu"
+  }
+];
+
+// Üniversite Yönetimi
+const universiteYonetim = [
+  {
+    id: 1,
+    isim: "Prof. Dr. Michael Santos",
+    unvan: "Rektör",
+    bolum: "Üniversite Yönetimi",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/33.webp",
+    aciklama: "Los Santos University'nin kurucu rektörü. 20 yıllık akademik deneyim.",
+    iletisim: "Rektörlük Binası"
+  },
+  {
+    id: 2,
+    isim: "Dr. Sarah Chen",
+    unvan: "Kimya Bölüm Başkanı",
+    bolum: "Kimya Bölümü",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20132057.png",
+    aciklama: "Organik kimya uzmanı. Özel araştırma projeleri yürütüyor.",
+    iletisim: "Kimya Laboratuvarı"
+  },
+  {
+    id: 3,
+    isim: "Prof. James Wilson",
+    unvan: "İşletme Bölüm Başkanı",
+    bolum: "İşletme Bölümü",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp",
+    aciklama: "Girişimcilik ve pazarlama konusunda uzman.",
+    iletisim: "İşletme Fakültesi"
+  },
+  {
+    id: 4,
+    isim: "Av. Maria Rodriguez",
+    unvan: "Hukuk Bölüm Başkanı",
+    bolum: "Hukuk Bölümü",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_5.png",
+    aciklama: "Ceza hukuku uzmanı. Eski savcı.",
+    iletisim: "Hukuk Fakültesi"
+  },
+  {
+    id: 5,
+    isim: "Dr. David Park",
+    unvan: "Tıp Bölüm Başkanı",
+    bolum: "Tıp Bölümü",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/image.webp",
+    aciklama: "Acil tıp uzmanı. Pillbox Hastanesi'nde danışman.",
+    iletisim: "Tıp Fakültesi"
+  },
+  {
+    id: 6,
+    isim: "Mühendis Carlos Vega",
+    unvan: "Mühendislik Bölüm Başkanı",
+    bolum: "Mühendislik Bölümü",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/1e.jpg",
+    aciklama: "Otomotiv mühendisliği uzmanı. Yarış araçları tasarımcısı.",
+    iletisim: "Mühendislik Atölyesi"
+  }
+];
+
 // ==================== RENK SINIFLARI ====================
 const renkSiniflari = {
   emerald: { bg: 'from-emerald-500/20 to-emerald-600/10', border: 'border-emerald-500/40', icon: 'from-emerald-500 to-emerald-600', text: 'text-emerald-400', badge: 'bg-emerald-500/20 text-emerald-300', glow: 'shadow-emerald-500/30' },
