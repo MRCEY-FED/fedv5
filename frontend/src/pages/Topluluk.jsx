@@ -458,6 +458,71 @@ const Topluluk = () => {
         </div>
       )}
 
+      {/* Haber Detay Modal */}
+      {selectedHaber !== null && (
+        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+          <button onClick={closeHaberModal} className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors z-10">
+            <X className="w-6 h-6" />
+          </button>
+          <div className="w-full max-w-4xl my-8">
+            {/* Haber Resmi */}
+            <div className="relative h-80 rounded-t-2xl overflow-hidden">
+              <img 
+                src={selectedHaber.resim} 
+                alt={selectedHaber.baslik}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+              {selectedHaber.onemliMi && (
+                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 bg-red-500 rounded-full">
+                  <AlertTriangle className="w-4 h-4 text-white" />
+                  <span className="text-white text-xs font-bold">SON DAKİKA</span>
+                </div>
+              )}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs font-bold">
+                    {selectedHaber.kategori}
+                  </span>
+                  <span className="text-gray-300 text-sm flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5" /> {selectedHaber.tarih}
+                  </span>
+                  <span className="text-gray-300 text-sm flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5" /> {selectedHaber.saat}
+                  </span>
+                </div>
+                <h2 className="text-white text-3xl font-bold">{selectedHaber.baslik}</h2>
+              </div>
+            </div>
+            
+            {/* Haber İçeriği */}
+            <div className="bg-gradient-to-br from-gray-900/95 to-black/95 rounded-b-2xl p-8 border border-amber-500/20 border-t-0">
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
+                <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-full flex items-center justify-center">
+                  <User className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold">{selectedHaber.yazar}</p>
+                  <p className="text-gray-500 text-sm">Weazel News Muhabiri</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                {selectedHaber.icerik}
+              </p>
+              
+              <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                <div className="flex items-center gap-2 text-amber-400">
+                  <Radio className="w-5 h-5" />
+                  <span className="font-bold">WEAZEL NEWS</span>
+                </div>
+                <p className="text-gray-500 text-sm">Los Santos'un Sesi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         {/* Back Button - sadece içerik görüntülenirken göster */}
         {activeTab ? (
