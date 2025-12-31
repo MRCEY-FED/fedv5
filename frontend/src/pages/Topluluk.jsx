@@ -356,11 +356,28 @@ const renkSiniflari = {
 };
 
 // ==================== KATEGORİ VERİLERİ ====================
+// Öne çıkan kategori (en üstte tek başına)
+const oneCikanKategori = {
+  id: 'university',
+  baslik: 'Los Santos University',
+  aciklama: 'Bilginin kapıları burada açılıyor! Kampüs rehberi, laboratuvarlar, kütüphane ve öğrenci kulüpleri. Eğitim mi yoksa başka bir şey mi arıyorsun?',
+  resim: 'https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20133831.png',
+  icon: GraduationCap,
+  renk: 'from-indigo-600 to-blue-600',
+  glowRenk: 'shadow-indigo-500/50',
+  borderRenk: 'border-indigo-500/50',
+  bgRenk: 'from-indigo-950/80 to-black/90',
+  adet: universityIcerikler.length,
+  etiket: 'ÜNİVERSİTE',
+  etiketRenk: 'bg-indigo-500'
+};
+
+// Diğer kategoriler (3'lü sıralar halinde)
 const kategoriler = [
   {
     id: 'illegal',
     baslik: 'Illegal İpuçları',
-    aciklama: 'Şehrin karanlık yüzünü keşfet. Gizli lokasyonlar, tehlikeli bağlantılar ve yeraltı dünyasının sırları burada.',
+    aciklama: 'Şehrin karanlık yüzünü keşfet. Gizli lokasyonlar ve yeraltı sırları.',
     resim: 'https://694360ba73fe9fd20180e80e.imgix.net/33.webp',
     icon: Skull,
     renk: 'from-red-600 to-orange-600',
@@ -374,7 +391,7 @@ const kategoriler = [
   {
     id: 'rehber',
     baslik: 'Video Rehberler',
-    aciklama: 'Sunucuya yeni misin? Tecrübeli oyunculardan öğren. Para kazanma, araç alma, ev satın alma ve daha fazlası.',
+    aciklama: 'Yeni misin? Tecrübeli oyunculardan öğren.',
     resim: 'https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp',
     icon: PlayCircle,
     renk: 'from-emerald-600 to-teal-600',
@@ -388,7 +405,7 @@ const kategoriler = [
   {
     id: 'kareler',
     baslik: 'Oyundan Kareler',
-    aciklama: 'Topluluğumuzun en güzel anları. Unutulmaz partiler, epik çatışmalar ve dostlukların fotoğrafları.',
+    aciklama: 'Topluluğun en güzel anları ve fotoğrafları.',
     resim: 'https://694360ba73fe9fd20180e80e.imgix.net/5.webp',
     icon: Camera,
     renk: 'from-violet-600 to-purple-600',
@@ -402,7 +419,7 @@ const kategoriler = [
   {
     id: 'klipler',
     baslik: 'Oyundan Kesitler',
-    aciklama: 'En eğlenceli ve heyecanlı RP anları. Komik sahneler, aksiyon dolu takipler ve unutulmaz diyaloglar.',
+    aciklama: 'En eğlenceli ve heyecanlı RP anları.',
     resim: 'https://694360ba73fe9fd20180e80e.imgix.net/image.webp',
     icon: Film,
     renk: 'from-fuchsia-600 to-pink-600',
@@ -416,7 +433,7 @@ const kategoriler = [
   {
     id: 'weazel',
     baslik: 'Weazel News',
-    aciklama: 'Los Santos\'un en güvenilir haber kaynağı! Son dakika haberleri, şehir olayları ve önemli duyurular burada.',
+    aciklama: 'Son dakika haberleri ve şehir olayları.',
     resim: 'https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp',
     icon: Newspaper,
     renk: 'from-amber-500 to-yellow-600',
