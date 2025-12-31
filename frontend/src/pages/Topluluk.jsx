@@ -350,10 +350,13 @@ const Topluluk = () => {
       if (selectedRehber !== null && e.key === 'Escape') {
         closeRehberModal();
       }
+      if (selectedHaber !== null && e.key === 'Escape') {
+        closeHaberModal();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImage, selectedVideo, selectedRehber]);
+  }, [selectedImage, selectedVideo, selectedRehber, selectedHaber]);
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
