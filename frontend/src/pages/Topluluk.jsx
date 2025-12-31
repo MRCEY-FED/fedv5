@@ -652,6 +652,137 @@ const Topluluk = () => {
         </div>
       )}
 
+      {/* Etkinlik Detay Modal */}
+      {selectedEtkinlik !== null && (
+        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+          <button onClick={closeEtkinlikModal} className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors z-10">
+            <X className="w-6 h-6" />
+          </button>
+          <div className="w-full max-w-4xl my-8">
+            {/* Etkinlik Resmi */}
+            <div className="relative h-80 rounded-t-2xl overflow-hidden">
+              <img 
+                src={selectedEtkinlik.resim} 
+                alt={selectedEtkinlik.baslik}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+              
+              {/* Durum Badge */}
+              <div className="absolute top-4 left-4 flex items-center gap-2">
+                {selectedEtkinlik.ozelEtkinlik && (
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full">
+                    <Star className="w-4 h-4 text-white" fill="white" />
+                    <span className="text-white text-xs font-bold">ÖZEL ETKİNLİK</span>
+                  </div>
+                )}
+                <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${
+                  selectedEtkinlik.durum === 'yaklasan' ? 'bg-cyan-500' :
+                  selectedEtkinlik.durum === 'devamEden' ? 'bg-green-500' : 'bg-gray-500'
+                }`}>
+                  {selectedEtkinlik.durum === 'yaklasan' && <Timer className="w-4 h-4 text-white" />}
+                  {selectedEtkinlik.durum === 'devamEden' && <Play className="w-4 h-4 text-white" />}
+                  {selectedEtkinlik.durum === 'tamamlandi' && <CheckCircle2 className="w-4 h-4 text-white" />}
+                  <span className="text-white text-xs font-bold">
+                    {selectedEtkinlik.durum === 'yaklasan' ? 'YAKLAŞAN' :
+                     selectedEtkinlik.durum === 'devamEden' ? 'DEVAM EDİYOR' : 'TAMAMLANDI'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs font-bold backdrop-blur-sm">
+                    {selectedEtkinlik.kategori}
+                  </span>
+                </div>
+                <h2 className="text-white text-3xl font-bold">{selectedEtkinlik.baslik}</h2>
+              </div>
+            </div>
+            
+            {/* Etkinlik İçeriği */}
+            <div className="bg-gradient-to-br from-gray-900/95 to-black/95 rounded-b-2xl p-8 border border-cyan-500/20 border-t-0">
+              {/* Etkinlik Detayları Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-cyan-500/10 rounded-xl p-4 border border-cyan-500/20">
+                  <div className="flex items-center gap-2 text-cyan-400 mb-2">
+                    <Calendar className="w-4 h-4" />
+                    <span className="text-xs font-medium">TARİH</span>
+                  </div>
+                  <p className="text-white font-bold">{selectedEtkinlik.tarih}</p>
+                </div>
+                <div className="bg-cyan-500/10 rounded-xl p-4 border border-cyan-500/20">
+                  <div className="flex items-center gap-2 text-cyan-400 mb-2">
+                    <Clock className="w-4 h-4" />
+                    <span className="text-xs font-medium">SAAT</span>
+                  </div>
+                  <p className="text-white font-bold">{selectedEtkinlik.baslangicSaati} - {selectedEtkinlik.bitisSaati}</p>
+                </div>
+                <div className="bg-cyan-500/10 rounded-xl p-4 border border-cyan-500/20">
+                  <div className="flex items-center gap-2 text-cyan-400 mb-2">
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-xs font-medium">KONUM</span>
+                  </div>
+                  <p className="text-white font-bold text-sm">{selectedEtkinlik.konum}</p>
+                </div>
+                <div className="bg-cyan-500/10 rounded-xl p-4 border border-cyan-500/20">
+                  <div className="flex items-center gap-2 text-cyan-400 mb-2">
+                    <Users className="w-4 h-4" />
+                    <span className="text-xs font-medium">KAPASİTE</span>
+                  </div>
+                  <p className="text-white font-bold">{selectedEtkinlik.katilimciLimiti || 'Sınırsız'}</p>
+                </div>
+              </div>
+
+              {/* Açıklama */}
+              <div className="mb-6">
+                <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-cyan-400" />
+                  Etkinlik Hakkında
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  {selectedEtkinlik.aciklama}
+                </p>
+              </div>
+
+              {/* Ödüller */}
+              {selectedEtkinlik.oduller && selectedEtkinlik.oduller.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                    <Trophy className="w-5 h-5 text-yellow-400" />
+                    Ödüller
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedEtkinlik.oduller.map((odul, index) => (
+                      <span key={index} className="px-4 py-2 bg-gradient-to-r from-yellow-500/20 to-amber-500/20 border border-yellow-500/30 rounded-lg text-yellow-300 text-sm font-medium">
+                        🏆 {odul}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Organizatör */}
+              <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center">
+                    <User className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">{selectedEtkinlik.organizator}</p>
+                    <p className="text-gray-500 text-sm">Organizatör</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-cyan-400">
+                  <CalendarDays className="w-5 h-5" />
+                  <span className="font-bold">ETKİNLİK TAKVİMİ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         {/* Back Button - sadece içerik görüntülenirken göster */}
         {activeTab ? (
