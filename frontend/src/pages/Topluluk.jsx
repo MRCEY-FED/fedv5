@@ -934,6 +934,203 @@ const Topluluk = () => {
           </div>
         )}
 
+        {/* ==================== WEAZEL NEWS ==================== */}
+        {activeTab === 'weazel' && (
+          <div>
+            {/* Header */}
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full mb-4">
+                <Radio className="w-4 h-4 text-amber-400 animate-pulse" />
+                <span className="text-amber-400 text-sm font-medium">Canlı Yayın</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                <span className="bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                  📺 WEAZEL NEWS
+                </span>
+              </h2>
+              <p className="text-gray-400 max-w-xl mx-auto">
+                Los Santos'un en güvenilir haber kaynağı - Son dakika haberleri ve önemli duyurular
+              </p>
+            </div>
+
+            {/* Weazel News Banner */}
+            <div className="relative mb-8 bg-gradient-to-r from-amber-600 to-yellow-600 rounded-2xl p-6 overflow-hidden">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23000\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
+              <div className="relative flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                    <Newspaper className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-white text-2xl font-bold">WEAZEL NEWS</h3>
+                    <p className="text-white/80 text-sm">Los Santos'un Sesi - 7/24 Haber</p>
+                  </div>
+                </div>
+                <div className="hidden md:flex items-center gap-3">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full backdrop-blur-sm">
+                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                    <span className="text-white text-sm font-medium">CANLI</span>
+                  </div>
+                  <div className="text-white/80 text-sm">
+                    {weazelHaberler.length} Haber
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Kategori Filtresi */}
+            <div className="flex flex-wrap gap-2 mb-8 justify-center">
+              <button
+                onClick={() => setHaberKategori('all')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  haberKategori === 'all'
+                    ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
+                    : 'bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20'
+                }`}
+              >
+                Tümü
+              </button>
+              {haberKategorileri.map(kat => (
+                <button
+                  key={kat}
+                  onClick={() => setHaberKategori(kat)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    haberKategori === kat
+                      ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
+                      : 'bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20'
+                  }`}
+                >
+                  {kat}
+                </button>
+              ))}
+            </div>
+
+            {/* Haberler Grid */}
+            <div className="space-y-6">
+              {/* Öne Çıkan Haber (İlk Haber) */}
+              {filteredHaberler.length > 0 && filteredHaberler[0].onemliMi && (
+                <div 
+                  onClick={() => openHaberModal(filteredHaberler[0])}
+                  className="group relative bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/30 rounded-2xl overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-amber-500/20 transition-all duration-500"
+                >
+                  <div className="grid md:grid-cols-2 gap-0">
+                    <div className="relative h-64 md:h-auto">
+                      <img 
+                        src={filteredHaberler[0].resim} 
+                        alt={filteredHaberler[0].baslik}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/50 md:bg-gradient-to-l" />
+                      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 bg-red-500 rounded-full animate-pulse">
+                        <AlertTriangle className="w-4 h-4 text-white" />
+                        <span className="text-white text-xs font-bold">SON DAKİKA</span>
+                      </div>
+                    </div>
+                    <div className="p-8 flex flex-col justify-center">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs font-bold">
+                          {filteredHaberler[0].kategori}
+                        </span>
+                        <span className="text-gray-400 text-sm flex items-center gap-1">
+                          <Calendar className="w-3.5 h-3.5" /> {filteredHaberler[0].tarih}
+                        </span>
+                      </div>
+                      <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 group-hover:text-amber-400 transition-colors">
+                        {filteredHaberler[0].baslik}
+                      </h3>
+                      <p className="text-gray-400 leading-relaxed mb-6">
+                        {filteredHaberler[0].ozet}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-gray-500">
+                          <User className="w-4 h-4" />
+                          <span className="text-sm">{filteredHaberler[0].yazar}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-amber-400 font-semibold group-hover:gap-3 transition-all">
+                          <span>Devamını Oku</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Diğer Haberler */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredHaberler.slice(filteredHaberler[0]?.onemliMi ? 1 : 0).map((haber) => (
+                  <div
+                    key={haber.id}
+                    onClick={() => openHaberModal(haber)}
+                    className="group bg-gradient-to-br from-amber-500/5 to-yellow-500/5 border border-amber-500/20 rounded-xl overflow-hidden cursor-pointer hover:border-amber-500/50 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300"
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={haber.resim} 
+                        alt={haber.baslik}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      {haber.onemliMi && (
+                        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2 py-1 bg-red-500 rounded-full">
+                          <AlertTriangle className="w-3 h-3 text-white" />
+                          <span className="text-white text-xs font-bold">ÖNEMLİ</span>
+                        </div>
+                      )}
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="px-2 py-0.5 bg-amber-500/30 text-amber-300 rounded text-xs font-medium backdrop-blur-sm">
+                            {haber.kategori}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-white font-bold mb-2 line-clamp-2 group-hover:text-amber-400 transition-colors">
+                        {haber.baslik}
+                      </h3>
+                      <p className="text-gray-500 text-sm line-clamp-2 mb-3">
+                        {haber.ozet}
+                      </p>
+                      <div className="flex items-center justify-between text-xs text-gray-600">
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{haber.tarih}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <User className="w-3 h-3" />
+                          <span>{haber.yazar}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Daha Fazla Haber Yok */}
+            {filteredHaberler.length === 0 && (
+              <div className="text-center py-16">
+                <Newspaper className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">Haber Bulunamadı</h3>
+                <p className="text-gray-400">Bu kategoride henüz haber yok.</p>
+              </div>
+            )}
+
+            {/* Alt Bilgi */}
+            <div className="mt-12 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/30 rounded-2xl p-8 text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Radio className="w-6 h-6 text-amber-400" />
+                <h3 className="text-xl font-bold text-white">Weazel News İle Daima Haberdar Ol!</h3>
+              </div>
+              <p className="text-gray-400 max-w-lg mx-auto">
+                Los Santos'ta olan biten her şeyden haberdar olmak için Weazel News'i takip et. 
+                Güvenilir, tarafsız ve hızlı haber.
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Discord CTA - sadece kategori seçim ekranında göster */}
         {!activeTab && (
           <div className="mt-16 text-center">
