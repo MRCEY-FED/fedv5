@@ -1818,103 +1818,166 @@ const Topluluk = () => {
                 </span>
               </h2>
               <p className="text-gray-400 max-w-xl mx-auto">
-                Bilginin kapıları burada açılıyor! Kampüs rehberi, laboratuvarlar ve daha fazlası.
+                Müfredat & Ders Kataloğu - Geleceğini şekillendir!
               </p>
             </div>
 
             {/* University Banner */}
-            <div className="relative mb-8 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-6 overflow-hidden">
+            <div className="relative mb-8 bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-600 rounded-2xl p-6 overflow-hidden">
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px'}} />
               </div>
               <div className="relative flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                    <GraduationCap className="w-8 h-8 text-white" />
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20">
+                    <GraduationCap className="w-10 h-10 text-white" />
                   </div>
                   <div>
                     <h3 className="text-white text-2xl font-bold">Los Santos University</h3>
-                    <p className="text-white/80 text-sm">Eğitim • Araştırma • Keşif</p>
+                    <p className="text-white/80 text-sm">📚 Müfredat & Ders Kataloğu</p>
+                    <p className="text-white/60 text-xs mt-1">Est. 1965 - Bilginin Işığında</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <div className="text-center px-4 py-2 bg-white/20 rounded-xl backdrop-blur-sm">
-                    <p className="text-white text-2xl font-bold">{universityIcerikler.length}</p>
-                    <p className="text-white/70 text-xs">İçerik</p>
+                    <p className="text-white text-2xl font-bold">{universityBolumler.length}</p>
+                    <p className="text-white/70 text-xs">Bölüm</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/20 rounded-xl backdrop-blur-sm">
+                    <p className="text-white text-2xl font-bold">{universityDersler.length}</p>
+                    <p className="text-white/70 text-xs">Ders</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* İçerik Kartları */}
+            {/* Bölümler */}
+            <div className="mb-8">
+              <h3 className="text-white text-lg font-bold mb-4 flex items-center gap-2">
+                <School className="w-5 h-5 text-indigo-400" />
+                Bölümler
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                {universityBolumler.map((bolum) => (
+                  <div
+                    key={bolum.id}
+                    className={`p-4 bg-gradient-to-br ${bolum.renk} rounded-xl text-center hover:scale-105 transition-all cursor-pointer shadow-lg`}
+                  >
+                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-2">
+                      {bolum.id === 'kimya' && <Beaker className="w-5 h-5 text-white" />}
+                      {bolum.id === 'isletme' && <Briefcase className="w-5 h-5 text-white" />}
+                      {bolum.id === 'hukuk' && <Shield className="w-5 h-5 text-white" />}
+                      {bolum.id === 'tip' && <Heart className="w-5 h-5 text-white" />}
+                      {bolum.id === 'muhendislik' && <Car className="w-5 h-5 text-white" />}
+                    </div>
+                    <p className="text-white text-xs font-bold">{bolum.ad}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Müfredat - Ders Kartları */}
+            <div className="mb-6">
+              <h3 className="text-white text-lg font-bold mb-4 flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-indigo-400" />
+                Müfredat - Tüm Dersler
+              </h3>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {universityIcerikler.map((icerik) => (
-                <div
-                  key={icerik.id}
-                  className="group bg-gradient-to-br from-indigo-500/5 to-blue-500/5 border border-indigo-500/30 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/20 hover:scale-[1.02] transition-all duration-500"
-                >
-                  {/* Resim */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={icerik.resim} 
-                      alt={icerik.baslik}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-                    
-                    {/* Badge'ler */}
-                    <div className="absolute top-3 left-3 flex items-center gap-2">
-                      <div className={`px-2.5 py-1 rounded-full text-xs font-bold backdrop-blur-sm ${
-                        icerik.kategori === 'Rehber' ? 'bg-emerald-500/80 text-white' :
-                        icerik.kategori === 'Eğitim' ? 'bg-blue-500/80 text-white' :
-                        icerik.kategori === 'Mekan' ? 'bg-purple-500/80 text-white' :
-                        'bg-pink-500/80 text-white'
-                      }`}>
-                        {icerik.kategori}
+              {universityDersler.map((ders) => {
+                const bolum = universityBolumler.find(b => b.id === ders.bolum);
+                return (
+                  <div
+                    key={ders.id}
+                    className="group bg-gradient-to-br from-gray-900/80 to-black/80 border border-indigo-500/20 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/20 hover:border-indigo-500/40 transition-all duration-500"
+                  >
+                    {/* Ders Resmi */}
+                    <div className="relative h-44 overflow-hidden">
+                      <img 
+                        src={ders.resim} 
+                        alt={ders.dersAdi}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                      
+                      {/* Üst Badge'ler */}
+                      <div className="absolute top-3 left-3 flex items-center gap-2">
+                        <div className={`px-2.5 py-1 bg-gradient-to-r ${bolum?.renk || 'from-indigo-500 to-blue-500'} rounded-lg text-white text-xs font-bold shadow-lg`}>
+                          {ders.dersKodu}
+                        </div>
+                        <div className={`px-2 py-1 rounded-lg text-xs font-medium backdrop-blur-sm ${
+                          ders.seviye === 'Başlangıç' ? 'bg-green-500/80 text-white' :
+                          ders.seviye === 'Orta' ? 'bg-yellow-500/80 text-white' :
+                          'bg-red-500/80 text-white'
+                        }`}>
+                          {ders.seviye}
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="absolute top-3 right-3">
-                      <div className={`px-2.5 py-1 rounded-full text-xs font-bold backdrop-blur-sm ${
-                        icerik.tarih === 'Yeni' ? 'bg-green-500/80 text-white' :
-                        icerik.tarih === 'Popüler' ? 'bg-yellow-500/80 text-white' :
-                        icerik.tarih === 'Aktif' ? 'bg-cyan-500/80 text-white' :
-                        'bg-gray-500/80 text-white'
-                      }`}>
-                        {icerik.tarih}
+
+                      {/* Kredi */}
+                      <div className="absolute top-3 right-3 px-2 py-1 bg-black/60 rounded-lg backdrop-blur-sm">
+                        <span className="text-white text-xs font-bold">{ders.kredi} Kredi</span>
+                      </div>
+
+                      {/* Ders Adı */}
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <p className="text-indigo-300 text-xs font-medium mb-1">{bolum?.ad}</p>
+                        <h3 className="text-white text-xl font-bold">{ders.dersAdi}</h3>
                       </div>
                     </div>
 
-                    <div className="absolute bottom-3 left-3 right-3">
-                      <h3 className="text-white text-xl font-bold">{icerik.baslik}</h3>
-                    </div>
-                  </div>
+                    {/* Ders İçeriği */}
+                    <div className="p-5">
+                      {/* Açıklama */}
+                      <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                        {ders.aciklama}
+                      </p>
 
-                  {/* İçerik */}
-                  <div className="p-5">
-                    <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                      {icerik.aciklama}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-indigo-400">
-                        <BookMarked className="w-4 h-4" />
-                        <span className="text-xs font-medium">Daha Fazla Bilgi</span>
+                      {/* Ne İşe Yarar? */}
+                      <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 mb-4">
+                        <div className="flex items-center gap-2 text-indigo-400 mb-2">
+                          <Zap className="w-4 h-4" />
+                          <span className="text-xs font-bold">NE İŞE YARAR?</span>
+                        </div>
+                        <p className="text-gray-300 text-sm">
+                          {ders.neIseYarar}
+                        </p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 transition-transform" />
+
+                      {/* Kazanımlar */}
+                      <div className="mb-4">
+                        <p className="text-gray-500 text-xs font-medium mb-2">KAZANIMLAR:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {ders.kazanimlar.map((kazanim, index) => (
+                            <span key={index} className="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-gray-300 text-xs">
+                              ✓ {kazanim}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Ön Koşul */}
+                      {ders.onKosul && (
+                        <div className="flex items-center gap-2 text-amber-400 text-xs">
+                          <AlertTriangle className="w-3.5 h-3.5" />
+                          <span>Ön Koşul: <strong>{ders.onKosul}</strong></span>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Alt Bilgi */}
             <div className="mt-12 bg-gradient-to-br from-indigo-500/10 to-blue-500/5 border border-indigo-500/30 rounded-2xl p-8 text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <School className="w-6 h-6 text-indigo-400" />
-                <h3 className="text-xl font-bold text-white">Üniversite Hakkında Daha Fazla Bilgi</h3>
+                <GraduationCap className="w-6 h-6 text-indigo-400" />
+                <h3 className="text-xl font-bold text-white">Kayıt Olmak İster misin?</h3>
               </div>
               <p className="text-gray-400 max-w-lg mx-auto mb-6">
-                Los Santos University hakkında daha fazla bilgi almak ve kampüsü keşfetmek için Discord'a katıl!
+                Los Santos University'ye kayıt olmak ve derslere başlamak için kampüsü ziyaret et veya Discord'dan bilgi al!
               </p>
               <a
                 href="https://discord.gg/fedvsocial"
@@ -1923,7 +1986,7 @@ const Topluluk = () => {
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold rounded-xl hover:scale-105 transition-all shadow-lg shadow-indigo-500/30"
               >
                 <GraduationCap className="w-5 h-5" />
-                Kampüsü Keşfet
+                Kayıt Ol
               </a>
             </div>
           </div>
