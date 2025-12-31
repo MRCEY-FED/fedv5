@@ -205,6 +205,106 @@ const weazelHaberler = [
   }
 ];
 
+// ==================== ETKİNLİK TAKVİMİ VERİLERİ ====================
+const etkinlikler = [
+  {
+    id: 1,
+    baslik: "Yılbaşı Kutlaması 2026",
+    aciklama: "Los Santos'un en büyük yılbaşı partisi! Havai fişek gösterisi, canlı müzik, DJ performansları ve sürpriz hediyeler sizi bekliyor. Tüm vatandaşlar davetlidir!",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/5.webp",
+    tarih: "31 Aralık 2025",
+    baslangicSaati: "22:00",
+    bitisSaati: "03:00",
+    konum: "Vinewood Hills",
+    organizator: "Belediye Başkanlığı",
+    kategori: "Parti",
+    durum: "yaklasan", // yaklasan, devamEden, tamamlandi
+    katilimciLimiti: null,
+    ozelEtkinlik: true,
+    oduller: ["VIP Araç Çekilişi", "50.000$ Nakit Ödül", "Özel Kıyafetler"]
+  },
+  {
+    id: 2,
+    baslik: "Drift Yarışması",
+    aciklama: "En iyi driftçiler Los Santos'ta yarışıyor! Profesyonel jüri tarafından değerlendirilecek yarışmada büyük ödüller sizi bekliyor.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/1e.jpg",
+    tarih: "2 Ocak 2026",
+    baslangicSaati: "20:00",
+    bitisSaati: "23:00",
+    konum: "Los Santos Havalimanı Pisti",
+    organizator: "LS Motorsport",
+    kategori: "Yarış",
+    durum: "yaklasan",
+    katilimciLimiti: 16,
+    ozelEtkinlik: false,
+    oduller: ["1. - 100.000$", "2. - 50.000$", "3. - 25.000$"]
+  },
+  {
+    id: 3,
+    baslik: "Gang Savaşları Turnuvası",
+    aciklama: "Şehrin en güçlü gangları karşı karşıya! Eleme usulü turnuvada hangi gang şampiyon olacak? Kayıtlar Discord üzerinden.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/image.webp",
+    tarih: "5 Ocak 2026",
+    baslangicSaati: "21:00",
+    bitisSaati: "00:00",
+    konum: "Grove Street Bölgesi",
+    organizator: "FED:V Yönetim",
+    kategori: "Turnuva",
+    durum: "yaklasan",
+    katilimciLimiti: 8,
+    ozelEtkinlik: true,
+    oduller: ["Bölge Hakimiyeti", "Gang Kasası 500.000$", "Özel Gang Araçları"]
+  },
+  {
+    id: 4,
+    baslik: "Bahama Club - Özel Gece",
+    aciklama: "Bu gece Bahama Club'da DJ Smoke sahnede! VIP masa rezervasyonları için erken gelmenizi öneririz.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/5.webp",
+    tarih: "3 Ocak 2026",
+    baslangicSaati: "23:00",
+    bitisSaati: "04:00",
+    konum: "Bahama Mamas Club",
+    organizator: "Bahama Club",
+    kategori: "Parti",
+    durum: "yaklasan",
+    katilimciLimiti: null,
+    ozelEtkinlik: false,
+    oduller: []
+  },
+  {
+    id: 5,
+    baslik: "Polis Akademisi Mezuniyet Töreni",
+    aciklama: "Yeni polis adaylarının mezuniyet töreni. Törene tüm vatandaşlar davetlidir. LSPD ailesine hoş geldiniz!",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp",
+    tarih: "7 Ocak 2026",
+    baslangicSaati: "19:00",
+    bitisSaati: "21:00",
+    konum: "LSPD Merkez Karargahı",
+    organizator: "LSPD",
+    kategori: "Resmi",
+    durum: "yaklasan",
+    katilimciLimiti: null,
+    ozelEtkinlik: false,
+    oduller: []
+  },
+  {
+    id: 6,
+    baslik: "Araba Fuarı ve Modifiye Yarışması",
+    aciklama: "En şık ve en hızlı araçlar Del Perro iskelesinde! Kategoriler: En İyi Modifiye, En Hızlı Araç, En Şık Araç.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/1e.jpg",
+    tarih: "10 Ocak 2026",
+    baslangicSaati: "18:00",
+    bitisSaati: "22:00",
+    konum: "Del Perro İskelesi",
+    organizator: "LS Car Culture",
+    kategori: "Etkinlik",
+    durum: "yaklasan",
+    katilimciLimiti: 30,
+    ozelEtkinlik: false,
+    oduller: ["Her kategori için 30.000$", "Özel Plaka Hakkı"]
+  }
+];
+
 // ==================== RENK SINIFLARI ====================
 const renkSiniflari = {
   emerald: { bg: 'from-emerald-500/20 to-emerald-600/10', border: 'border-emerald-500/40', icon: 'from-emerald-500 to-emerald-600', text: 'text-emerald-400', badge: 'bg-emerald-500/20 text-emerald-300', glow: 'shadow-emerald-500/30' },
