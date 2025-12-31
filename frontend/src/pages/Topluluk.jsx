@@ -307,40 +307,125 @@ const etkinlikler = [
 ];
 
 // ==================== LOS SANTOS UNIVERSITY VERİLERİ ====================
-const universityIcerikler = [
+// Bölümler
+const universityBolumler = [
+  { id: 'kimya', ad: 'Kimya Bölümü', icon: 'Beaker', renk: 'from-green-500 to-emerald-600' },
+  { id: 'isletme', ad: 'İşletme Bölümü', icon: 'Briefcase', renk: 'from-blue-500 to-indigo-600' },
+  { id: 'hukuk', ad: 'Hukuk Bölümü', icon: 'Scale', renk: 'from-amber-500 to-orange-600' },
+  { id: 'tip', ad: 'Tıp Bölümü', icon: 'Heart', renk: 'from-red-500 to-pink-600' },
+  { id: 'muhendislik', ad: 'Mühendislik Bölümü', icon: 'Wrench', renk: 'from-gray-500 to-slate-600' },
+];
+
+// Müfredat - Dersler
+const universityDersler = [
   {
     id: 1,
-    baslik: "Üniversite Kampüsü Turu",
-    aciklama: "Los Santos Üniversitesi'nin tüm binalarını, kütüphanesini ve laboratuvarlarını keşfedin.",
-    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20133831.png",
-    kategori: "Rehber",
-    tarih: "Her Zaman"
+    dersKodu: "KIM101",
+    dersAdi: "Temel Kimya",
+    bolum: "kimya",
+    kredi: 4,
+    seviye: "Başlangıç",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20132057.png",
+    aciklama: "Kimyanın temel prensiplerini öğren. Elementler, bileşikler ve reaksiyonlar hakkında bilgi edin.",
+    neIseYarar: "Temel kimya bilgisi kazanırsın. İleride daha gelişmiş üretim yapabilmek için bu dersi geçmen gerekiyor.",
+    kazanimlar: ["Element tanıma", "Basit reaksiyonlar", "Laboratuvar güvenliği"],
+    onKosul: null
   },
   {
     id: 2,
-    baslik: "Kimya Laboratuvarı",
-    aciklama: "Kimya bölümünün laboratuvarlarında neler öğrenebilirsin? İpucu: Sadece yasal şeyler değil...",
-    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20132057.png",
-    kategori: "Eğitim",
-    tarih: "Yeni"
+    dersKodu: "KIM201",
+    dersAdi: "İleri Kimya",
+    bolum: "kimya",
+    kredi: 6,
+    seviye: "Orta",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20133831.png",
+    aciklama: "Karmaşık kimyasal süreçleri ve sentez yöntemlerini öğren.",
+    neIseYarar: "Özel maddeler üretebilirsin. Bazı 'özel' işler için bu bilgiler çok işe yarar...",
+    kazanimlar: ["Sentez teknikleri", "Saflaştırma", "Kalite kontrol"],
+    onKosul: "KIM101"
   },
   {
     id: 3,
-    baslik: "Kütüphane Çalışma Alanları",
-    aciklama: "Sessiz çalışma alanları ve araştırma kaynakları. Bazı kitaplar çok ilginç bilgiler içeriyor...",
+    dersKodu: "ISL101",
+    dersAdi: "İşletme Yönetimi",
+    bolum: "isletme",
+    kredi: 4,
+    seviye: "Başlangıç",
     resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp",
-    kategori: "Mekan",
-    tarih: "Popüler"
+    aciklama: "Bir işletmeyi nasıl kurarsın ve yönetirsin? Temel işletme prensiplerini öğren.",
+    neIseYarar: "Kendi işini kurabilir, mağaza veya restoran açabilirsin. Para yönetimi ve müşteri ilişkileri.",
+    kazanimlar: ["İş planı oluşturma", "Finansal yönetim", "Personel yönetimi"],
+    onKosul: null
   },
   {
     id: 4,
-    baslik: "Öğrenci Kulüpleri",
-    aciklama: "Üniversitedeki aktif kulüpler ve topluluklar. Yeni insanlarla tanış, bağlantılar kur.",
+    dersKodu: "ISL201",
+    dersAdi: "Pazarlama Stratejileri",
+    bolum: "isletme",
+    kredi: 5,
+    seviye: "Orta",
     resim: "https://694360ba73fe9fd20180e80e.imgix.net/5.webp",
-    kategori: "Sosyal",
-    tarih: "Aktif"
+    aciklama: "Ürün ve hizmetlerini nasıl pazarlarsın? Müşteri kazanma ve marka oluşturma.",
+    neIseYarar: "İşletmeni büyütebilir, daha fazla müşteri çekebilirsin. Reklam ve tanıtım stratejileri.",
+    kazanimlar: ["Marka oluşturma", "Sosyal medya", "Müşteri analizi"],
+    onKosul: "ISL101"
+  },
+  {
+    id: 5,
+    dersKodu: "HUK101",
+    dersAdi: "Temel Hukuk",
+    bolum: "hukuk",
+    kredi: 4,
+    seviye: "Başlangıç",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_5.png",
+    aciklama: "Los Santos'un yasal sistemini öğren. Haklarını ve sorumluluklarını bil.",
+    neIseYarar: "Yasal haklarını bilirsin. Polis ile muhatap olduğunda ne yapman gerektiğini anlarsın.",
+    kazanimlar: ["Temel haklar", "Yasal prosedürler", "Savunma hakları"],
+    onKosul: null
+  },
+  {
+    id: 6,
+    dersKodu: "TIP101",
+    dersAdi: "İlk Yardım",
+    bolum: "tip",
+    kredi: 3,
+    seviye: "Başlangıç",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/image.webp",
+    aciklama: "Acil durumlarda ilk yardım nasıl yapılır? Hayat kurtarıcı bilgiler.",
+    neIseYarar: "Yaralı arkadaşlarına yardım edebilirsin. EMS gelmeden önce müdahale şansın olur.",
+    kazanimlar: ["Yara bakımı", "CPR", "Kanamaları durdurma"],
+    onKosul: null
+  },
+  {
+    id: 7,
+    dersKodu: "MUH101",
+    dersAdi: "Araç Mekaniği",
+    bolum: "muhendislik",
+    kredi: 5,
+    seviye: "Başlangıç",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/1e.jpg",
+    aciklama: "Araçların nasıl çalıştığını öğren. Tamir ve modifikasyon temelleri.",
+    neIseYarar: "Kendi araçlarını tamir edebilir, performans artırabilirsin. Mekanik işlerden para kazanabilirsin.",
+    kazanimlar: ["Motor bilgisi", "Temel tamir", "Modifikasyon"],
+    onKosul: null
+  },
+  {
+    id: 8,
+    dersKodu: "MUH201",
+    dersAdi: "İleri Modifikasyon",
+    bolum: "muhendislik",
+    kredi: 6,
+    seviye: "İleri",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/1e.jpg",
+    aciklama: "Profesyonel araç modifikasyonu. Turbo, süspansiyon ve özel parçalar.",
+    neIseYarar: "Araçlarını yarış seviyesine çıkarabilirsin. Özel modifikasyonlar yapabilirsin.",
+    kazanimlar: ["Turbo sistemleri", "Süspansiyon ayarı", "ECU programlama"],
+    onKosul: "MUH101"
   }
 ];
+
+// Eski içerikler (geriye uyumluluk için)
+const universityIcerikler = universityDersler;
 
 // ==================== RENK SINIFLARI ====================
 const renkSiniflari = {
