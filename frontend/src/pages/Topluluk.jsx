@@ -274,6 +274,20 @@ const kategoriler = [
     adet: galeriVideolar.length,
     etiket: 'VİDEO',
     etiketRenk: 'bg-fuchsia-500'
+  },
+  {
+    id: 'weazel',
+    baslik: 'Weazel News',
+    aciklama: 'Los Santos\'un en güvenilir haber kaynağı! Son dakika haberleri, şehir olayları ve önemli duyurular burada.',
+    resim: 'https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp',
+    icon: Newspaper,
+    renk: 'from-amber-500 to-yellow-600',
+    glowRenk: 'shadow-amber-500/50',
+    borderRenk: 'border-amber-500/50',
+    bgRenk: 'from-amber-950/80 to-black/90',
+    adet: weazelHaberler.length,
+    etiket: 'HABER',
+    etiketRenk: 'bg-amber-500'
   }
 ];
 
