@@ -4,7 +4,8 @@ import {
   ChevronLeft, X, ChevronRight, Image, Film, Play, Camera, Video,
   Skull, Eye, Lock, BookOpen, HelpCircle, Sparkles, PlayCircle,
   Gamepad2, Briefcase, Car, Home, Users, DollarSign, Heart, Shield,
-  Search, Filter, Clock, ThumbsUp, ArrowRight, Zap, Star, Flame
+  Search, Filter, Clock, ThumbsUp, ArrowRight, Zap, Star, Flame,
+  Newspaper, Radio, Mic, TrendingUp, AlertTriangle, Calendar, MapPin, User
 } from 'lucide-react';
 
 // ==================== İLLEGAL İPUCU VERİLERİ ====================
