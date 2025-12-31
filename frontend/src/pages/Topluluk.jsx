@@ -1589,46 +1589,6 @@ const Topluluk = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
               ))}
-                        <div className="flex items-center gap-2 text-gray-400">
-                          <MapPin className="w-4 h-4 text-cyan-400" />
-                          <span className="text-sm">{etkinlik.konum}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-400">
-                          <User className="w-4 h-4 text-cyan-400" />
-                          <span className="text-sm">{etkinlik.organizator}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-400">
-                          <Users className="w-4 h-4 text-cyan-400" />
-                          <span className="text-sm">{etkinlik.katilimciLimiti ? `Max ${etkinlik.katilimciLimiti} kişi` : 'Sınırsız'}</span>
-                        </div>
-                      </div>
-
-                      {/* Ödüller Preview */}
-                      {etkinlik.oduller && etkinlik.oduller.length > 0 && (
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <Trophy className="w-4 h-4 text-yellow-400" />
-                          {etkinlik.oduller.slice(0, 2).map((odul, index) => (
-                            <span key={index} className="px-2 py-1 bg-yellow-500/10 border border-yellow-500/30 rounded text-yellow-300 text-xs">
-                              {odul}
-                            </span>
-                          ))}
-                          {etkinlik.oduller.length > 2 && (
-                            <span className="text-yellow-400 text-xs">+{etkinlik.oduller.length - 2} daha</span>
-                          )}
-                        </div>
-                      )}
-
-                      {/* Detay Butonu */}
-                      <div className="flex justify-end mt-4">
-                        <div className="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-3 transition-all">
-                          <span>Detayları Gör</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
 
             {/* Etkinlik Yok */}
