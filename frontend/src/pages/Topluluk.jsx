@@ -658,6 +658,7 @@ const Topluluk = () => {
   const [rehberSearch, setRehberSearch] = useState('');
   const [haberKategori, setHaberKategori] = useState('all');
   const [etkinlikKategori, setEtkinlikKategori] = useState('all');
+  const [universityKategori, setUniversityKategori] = useState('mufredat');
 
   // Modal kontrolü
   const openImageModal = (index) => setSelectedImage(index);
