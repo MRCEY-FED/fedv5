@@ -447,7 +447,7 @@ const kategoriler = [
   {
     id: 'etkinlik',
     baslik: 'Etkinlik Takvimi',
-    aciklama: 'Yaklaşan etkinlikler, partiler, yarışmalar ve turnuvalar! Hiçbir etkinliği kaçırma, takvimine ekle.',
+    aciklama: 'Partiler, yarışmalar ve turnuvalar burada!',
     resim: 'https://694360ba73fe9fd20180e80e.imgix.net/1e.jpg',
     icon: CalendarDays,
     renk: 'from-cyan-500 to-blue-600',
