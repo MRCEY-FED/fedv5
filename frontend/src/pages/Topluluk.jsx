@@ -140,6 +140,70 @@ const galeriVideolar = [
   { id: 6, videoId: "uI2-GPsgk6k", title: "LSPD Kesit #2", description: "En eğlenceli RP sahneleri" }
 ];
 
+// ==================== WEAZEL NEWS HABERLERİ ====================
+const weazelHaberler = [
+  {
+    id: 1,
+    baslik: "Son Dakika: Büyük Banka Soygunu!",
+    ozet: "Dün gece Maze Bank'ta gerçekleşen soygun tüm şehri şoke etti. Maskeli soyguncular milyonlarca dolar ile kaçmayı başardı.",
+    icerik: "Los Santos'un en büyük bankası Maze Bank, dün gece profesyonel bir ekip tarafından soyuldu. Soyguncular, güvenlik sistemlerini devre dışı bırakarak kasalara ulaştı. LSPD olay yerinde geniş çaplı soruşturma başlattı.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/image.webp",
+    tarih: "31 Aralık 2025",
+    saat: "23:45",
+    kategori: "Asayiş",
+    onemliMi: true,
+    yazar: "Mike Torres"
+  },
+  {
+    id: 2,
+    baslik: "Yeni Yıl Kutlamaları Vinewood'da!",
+    ozet: "Bu yıl Vinewood tepelerinde muhteşem bir yılbaşı partisi düzenleniyor. Tüm vatandaşlar davetli!",
+    icerik: "Belediye Başkanlığı, yeni yılı karşılamak için Vinewood Hills'te büyük bir kutlama organize ediyor. Havai fişek gösterisi, canlı müzik ve ücretsiz yiyecekler vatandaşları bekliyor.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/5.webp",
+    tarih: "31 Aralık 2025",
+    saat: "18:00",
+    kategori: "Etkinlik",
+    onemliMi: false,
+    yazar: "Sarah Chen"
+  },
+  {
+    id: 3,
+    baslik: "LSPD'den Operasyon: 15 Kişi Gözaltında",
+    ozet: "Grove Street'te düzenlenen uyuşturucu operasyonunda çok sayıda şüpheli yakalandı.",
+    icerik: "LSPD Narkotik Birimi, haftalardır süren takibin ardından Grove Street bölgesinde büyük bir operasyon düzenledi. Operasyonda 15 şüpheli gözaltına alındı, çok miktarda uyuşturucu madde ele geçirildi.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_5.png",
+    tarih: "30 Aralık 2025",
+    saat: "14:30",
+    kategori: "Asayiş",
+    onemliMi: true,
+    yazar: "James Wilson"
+  },
+  {
+    id: 4,
+    baslik: "Yeni İş Fırsatları: Taco Şirketi İşçi Arıyor",
+    ozet: "Los Santos'un en popüler taco restoranı, genişleme planları kapsamında yeni çalışanlar arıyor.",
+    icerik: "Taco Libre, şehrin dört bir yanında yeni şubeler açmayı planlıyor. Şirket, aşçı, garson ve kurye pozisyonları için başvuru kabul ediyor. İlgilenenler Vespucci Beach şubesine başvurabilir.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_2.png",
+    tarih: "29 Aralık 2025",
+    saat: "10:00",
+    kategori: "Ekonomi",
+    onemliMi: false,
+    yazar: "Maria Rodriguez"
+  },
+  {
+    id: 5,
+    baslik: "Fırtına Uyarısı: Dikkatli Olun!",
+    ozet: "Meteoroloji, önümüzdeki günlerde şiddetli yağış ve fırtına beklendiğini duyurdu.",
+    icerik: "Los Santos ve çevresinde önümüzdeki 48 saat içinde şiddetli yağış bekleniyor. Vatandaşların gereksiz yere dışarı çıkmaması ve araç kullanırken dikkatli olması öneriliyor.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_5.png",
+    tarih: "28 Aralık 2025",
+    saat: "08:15",
+    kategori: "Hava Durumu",
+    onemliMi: true,
+    yazar: "Weather Team"
+  }
+];
+
 // ==================== RENK SINIFLARI ====================
 const renkSiniflari = {
   emerald: { bg: 'from-emerald-500/20 to-emerald-600/10', border: 'border-emerald-500/40', icon: 'from-emerald-500 to-emerald-600', text: 'text-emerald-400', badge: 'bg-emerald-500/20 text-emerald-300', glow: 'shadow-emerald-500/30' },
