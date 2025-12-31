@@ -6,7 +6,8 @@ import {
   Gamepad2, Briefcase, Car, Home, Users, DollarSign, Heart, Shield,
   Search, Filter, Clock, ThumbsUp, ArrowRight, Zap, Star, Flame,
   Newspaper, Radio, Mic, TrendingUp, AlertTriangle, Calendar, MapPin, User,
-  CalendarDays, PartyPopper, Trophy, Music, Ticket, Gift, Timer, CheckCircle2
+  CalendarDays, PartyPopper, Trophy, Music, Ticket, Gift, Timer, CheckCircle2,
+  GraduationCap, School, BookMarked, Beaker, FileText
 } from 'lucide-react';
 
 // ==================== İLLEGAL İPUCU VERİLERİ ====================
