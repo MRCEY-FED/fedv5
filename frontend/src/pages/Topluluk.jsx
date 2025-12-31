@@ -865,69 +865,122 @@ const Topluluk = () => {
             </span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            {activeTab ? kategoriler.find(k => k.id === activeTab)?.aciklama : 'İpuçları, rehberler, galeri ve daha fazlası'}
+            {activeTab ? (activeTab === 'university' ? oneCikanKategori.aciklama : kategoriler.find(k => k.id === activeTab)?.aciklama) : 'İpuçları, rehberler, galeri ve daha fazlası'}
           </p>
         </div>
 
         {/* ==================== KATEGORİ KARTLARI ==================== */}
         {!activeTab && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {kategoriler.map((kategori) => {
-              const IconComponent = kategori.icon;
-              return (
-                <div
-                  key={kategori.id}
-                  onClick={() => setActiveTab(kategori.id)}
-                  className={`group relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl ${kategori.glowRenk}`}
-                >
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <img 
-                      src={kategori.resim} 
-                      alt={kategori.baslik}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${kategori.bgRenk}`} />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-                  </div>
+          <div className="space-y-6">
+            {/* Öne Çıkan Kategori - Los Santos University */}
+            <div
+              onClick={() => setActiveTab(oneCikanKategori.id)}
+              className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl ${oneCikanKategori.glowRenk}`}
+            >
+              <div className="absolute inset-0">
+                <img 
+                  src={oneCikanKategori.resim} 
+                  alt={oneCikanKategori.baslik}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-r ${oneCikanKategori.bgRenk}`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              </div>
 
-                  {/* Content */}
-                  <div className="relative p-8 min-h-[320px] flex flex-col justify-between">
-                    {/* Top Section */}
-                    <div className="flex items-start justify-between">
-                      <div className={`inline-flex items-center gap-2 px-3 py-1.5 ${kategori.etiketRenk} rounded-full`}>
-                        <Zap className="w-3.5 h-3.5 text-white" />
-                        <span className="text-white text-xs font-bold tracking-wider">{kategori.etiket}</span>
-                      </div>
-                      <div className={`w-14 h-14 bg-gradient-to-br ${kategori.renk} rounded-2xl flex items-center justify-center shadow-xl ${kategori.glowRenk} transform group-hover:rotate-12 transition-transform duration-500`}>
-                        <IconComponent className="w-7 h-7 text-white" />
-                      </div>
+              <div className="relative p-8 md:p-10 min-h-[200px] flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`inline-flex items-center gap-2 px-3 py-1.5 ${oneCikanKategori.etiketRenk} rounded-full`}>
+                      <Zap className="w-3.5 h-3.5 text-white" />
+                      <span className="text-white text-xs font-bold tracking-wider">{oneCikanKategori.etiket}</span>
+                    </div>
+                    <div className="px-3 py-1 bg-white/10 rounded-full">
+                      <span className="text-white/80 text-xs font-medium">YENİ</span>
+                    </div>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                    {oneCikanKategori.baslik}
+                  </h3>
+                  <p className="text-gray-300 text-sm md:text-base leading-relaxed max-w-2xl">
+                    {oneCikanKategori.aciklama}
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${oneCikanKategori.renk} rounded-2xl flex items-center justify-center shadow-xl ${oneCikanKategori.glowRenk}`}>
+                    <GraduationCap className="w-8 h-8 text-white" />
+                  </div>
+                  <div className={`flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${oneCikanKategori.renk} rounded-xl text-white font-bold shadow-lg ${oneCikanKategori.glowRenk} group-hover:gap-4 transition-all duration-300`}>
+                    <span>Keşfet</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Diğer Kategoriler - 3'lü Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {kategoriler.map((kategori) => {
+                const IconComponent = kategori.icon;
+                return (
+                  <div
+                    key={kategori.id}
+                    onClick={() => setActiveTab(kategori.id)}
+                    className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:scale-[1.03] hover:shadow-xl ${kategori.glowRenk}`}
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0">
+                      <img 
+                        src={kategori.resim} 
+                        alt={kategori.baslik}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-t ${kategori.bgRenk}`} />
                     </div>
 
-                    {/* Bottom Section */}
-                    <div>
-                      <h3 className="text-3xl font-bold text-white mb-3 group-hover:translate-x-2 transition-transform duration-300">
-                        {kategori.baslik}
-                      </h3>
-                      <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-sm">
-                        {kategori.aciklama}
-                      </p>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-2 text-white/80">
-                            <Star className="w-4 h-4 text-yellow-400" />
-                            <span className="text-sm font-medium">{kategori.adet} İçerik</span>
+                    {/* Content */}
+                    <div className="relative p-5 min-h-[220px] flex flex-col justify-between">
+                      {/* Top Section */}
+                      <div className="flex items-start justify-between">
+                        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 ${kategori.etiketRenk} rounded-full`}>
+                          <span className="text-white text-xs font-bold">{kategori.etiket}</span>
+                        </div>
+                        <div className={`w-11 h-11 bg-gradient-to-br ${kategori.renk} rounded-xl flex items-center justify-center shadow-lg ${kategori.glowRenk} transform group-hover:rotate-12 transition-transform duration-500`}>
+                          <IconComponent className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+
+                      {/* Bottom Section */}
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-2 group-hover:translate-x-1 transition-transform duration-300">
+                          {kategori.baslik}
+                        </h3>
+                        <p className="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">
+                          {kategori.aciklama}
+                        </p>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1.5 text-white/70">
+                            <Star className="w-3.5 h-3.5 text-yellow-400" />
+                            <span className="text-xs font-medium">{kategori.adet} İçerik</span>
+                          </div>
+                          
+                          <div className={`flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r ${kategori.renk} rounded-lg text-white font-semibold text-xs shadow-md group-hover:gap-2 transition-all duration-300`}>
+                            <span>Gir</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
                           </div>
                         </div>
-                        
-                        <div className={`flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r ${kategori.renk} rounded-xl text-white font-bold text-sm shadow-lg ${kategori.glowRenk} group-hover:gap-4 transition-all duration-300`}>
-                          <span>Keşfet</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </div>
                       </div>
                     </div>
+
+                    {/* Animated Border */}
+                    <div className={`absolute inset-0 rounded-2xl border ${kategori.borderRenk} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
                   {/* Animated Border */}
                   <div className={`absolute inset-0 rounded-3xl border-2 ${kategori.borderRenk} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
