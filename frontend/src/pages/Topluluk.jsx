@@ -306,6 +306,42 @@ const etkinlikler = [
   }
 ];
 
+// ==================== LOS SANTOS UNIVERSITY VERİLERİ ====================
+const universityIcerikler = [
+  {
+    id: 1,
+    baslik: "Üniversite Kampüsü Turu",
+    aciklama: "Los Santos Üniversitesi'nin tüm binalarını, kütüphanesini ve laboratuvarlarını keşfedin.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20133831.png",
+    kategori: "Rehber",
+    tarih: "Her Zaman"
+  },
+  {
+    id: 2,
+    baslik: "Kimya Laboratuvarı",
+    aciklama: "Kimya bölümünün laboratuvarlarında neler öğrenebilirsin? İpucu: Sadece yasal şeyler değil...",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-12-31%20132057.png",
+    kategori: "Eğitim",
+    tarih: "Yeni"
+  },
+  {
+    id: 3,
+    baslik: "Kütüphane Çalışma Alanları",
+    aciklama: "Sessiz çalışma alanları ve araştırma kaynakları. Bazı kitaplar çok ilginç bilgiler içeriyor...",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/Screenshot_72.webp",
+    kategori: "Mekan",
+    tarih: "Popüler"
+  },
+  {
+    id: 4,
+    baslik: "Öğrenci Kulüpleri",
+    aciklama: "Üniversitedeki aktif kulüpler ve topluluklar. Yeni insanlarla tanış, bağlantılar kur.",
+    resim: "https://694360ba73fe9fd20180e80e.imgix.net/5.webp",
+    kategori: "Sosyal",
+    tarih: "Aktif"
+  }
+];
+
 // ==================== RENK SINIFLARI ====================
 const renkSiniflari = {
   emerald: { bg: 'from-emerald-500/20 to-emerald-600/10', border: 'border-emerald-500/40', icon: 'from-emerald-500 to-emerald-600', text: 'text-emerald-400', badge: 'bg-emerald-500/20 text-emerald-300', glow: 'shadow-emerald-500/30' },
